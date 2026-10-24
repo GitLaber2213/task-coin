@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
 import { AuthPage } from "../../pages";
 import { GuardRoutes, GuestRoutes } from "./guard";
+import { ROUTES } from "../../shared";
 
 
 export const router = createBrowserRouter([{
@@ -16,7 +17,7 @@ export const router = createBrowserRouter([{
             element: <GuestRoutes />,
             children: [
                 {
-                    path: '/auth',
+                    path: ROUTES.AUTH,
                     element:
                         <AuthPage />
                 },

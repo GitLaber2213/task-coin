@@ -1,5 +1,6 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../features/auth/provider";
+import { ROUTES } from "../../shared";
 
 export const GuardRoutes = () => {
     const { isAuth, isLoading } = useAuth();
@@ -7,7 +8,7 @@ export const GuardRoutes = () => {
 
     if (isLoading) return <div>Loading...</div>;
     if (!isAuth) {
-        return <Navigate to="/auth" state={{ from: location }} replace />
+        return <Navigate to={ROUTES.AUTH} state={{ from: location }} replace />
     };
     
     return <Outlet />
