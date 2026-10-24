@@ -19,7 +19,7 @@ export const GuestRoutes = () => {
     const location = useLocation();
 
     if (isLoading) return <div>Loading...</div>;
-    if (isAuth) return <Navigate to={location.state?.from?.pathname ?? '/ready'} replace />;
+    if (isAuth) return <Navigate to={'/ready'} state={{ from: location }} replace />;
 
     return <Outlet />;
 };
