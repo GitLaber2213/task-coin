@@ -1,16 +1,6 @@
 import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
 import { AuthPage } from "../../pages";
-import { GuardRoutes } from "./guard";
-import { useAuth } from "../../features/auth/provider";
-
-
-
-const RootRedirect = () => {
-    const { isAuth, isLoading } = useAuth();
-    console.log(isAuth, isLoading);
-
-    return isAuth && !isLoading ? <Navigate to="/ready" replace /> : <Navigate to="/auth" replace />;
-};
+import { GuardRoutes, GuestRoutes } from "./guard";
 
 
 export const router = createBrowserRouter([{
@@ -20,14 +10,17 @@ export const router = createBrowserRouter([{
     children: [
         {
             index: true,
-            element: <RootRedirect />
+            element: <Navigate to="/ready" replace />
         },
         {
-            path: '/auth',
-            element: <>
-                <AuthPage />
-                <RootRedirect />
-            </>
+            element: <GuestRoutes />,
+            children: [
+                {
+                    path: '/auth',
+                    element:
+                        <AuthPage />
+                },
+            ]
         },
         {
             element: <GuardRoutes />,
