@@ -1,17 +1,21 @@
 import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
-import { AuthPage } from "../../pages";
+import { AuthPage, RatesPage, CardPage } from "../../pages";
 import { GuardRoutes, GuestRoutes } from "./guard";
 import { ROUTES } from "../../shared";
+import { NavBar } from "../../widgets";
 
 
 export const router = createBrowserRouter([{
     path: '/',
-    element: <Outlet />,
+    element: <>
+        <NavBar />
+        <Outlet />
+    </>,
     errorElement: <div>404</div>,
     children: [
         {
             index: true,
-            element: <Navigate to="/ready" replace />
+            element: <Navigate to={ROUTES.RATES} replace />
         },
         {
             element: <GuestRoutes />,
@@ -27,8 +31,12 @@ export const router = createBrowserRouter([{
             element: <GuardRoutes />,
             children: [
                 {
-                    path: '/ready',
-                    element: <div>auth (пользователь успешно вошел)</div>
+                    path: ROUTES.RATES,
+                    element: <RatesPage />
+                },
+                {
+                    path: ROUTES.CARD_NEW,
+                    element: <CardPage />
                 },
             ]
         }

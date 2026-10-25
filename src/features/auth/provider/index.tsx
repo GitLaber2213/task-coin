@@ -34,16 +34,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             try {
 
                 const accessToken = localStorage.getItem('accessToken');
+                if(!accessToken) return;
+
                 const response = await fetch('https://example.com/auth', {
                     method: 'GET',
                     headers: {
-                        'Authorization': accessToken || ''
+                        'Authorization': accessToken
                     }
                 });
                 const res: User = await response.json();
 
                 if (response.ok) {
-                    console.log('bebra');
                     setUser(res);
                     setIsAuth(true);
                 };

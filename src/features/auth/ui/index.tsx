@@ -16,7 +16,8 @@ export const Auth = () => {
         defaultValues: {
             email: '',
             password: ''
-        }
+        },
+        mode: 'onChange'
     });
 
 

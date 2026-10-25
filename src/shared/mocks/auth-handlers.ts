@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw/http'
 import type { AuthDto } from './dtos/auth-dto';
 
-let isLogged = false;
+let _isLogged = false;
 
 export const authHandlers = [
     http.post<never, AuthDto>('https://example.com/auth', async ({ request }) => {
@@ -9,7 +9,7 @@ export const authHandlers = [
 
 
         if (email === 'admin@gmail.com' && password === 'admin123') {
-            isLogged = true
+            _isLogged = true
             return HttpResponse.json({
                 user: {
                     id: 'xyz-1',
@@ -44,7 +44,7 @@ export const authHandlers = [
         });
     }),
     http.post('https://example.com/logout', () => {
-        isLogged = false;
+        _isLogged = false;
 
         return new HttpResponse(null, { status: 204 });
     }),

@@ -1,1 +1,1 @@
-export { ROUTES } from './routing';
+export { ROUTES, QUERY_PARAMS } from './routing';
