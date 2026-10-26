@@ -11,6 +11,7 @@ export { ImageUpload } from './image-upload';
 export { Title } from './title';
 export { Table, type TableColumn } from './table';
 export { LineChart, type LineChartPoint } from './line-chart';
+export { Loader } from './loader';
 
 export { ButtonVariations } from './button/button-variations';
 export { InputVariations } from './input/input-variations';
@@ -25,3 +26,4 @@ export { ImageUploadVariations } from './image-upload/image-upload-variations';
 export { TitleVariations } from './title/title-variations';
 export { TableVariations } from './table/table-variations';
 export { LineChartVariations } from './line-chart/line-chart-variations';
+export { LoaderVariations } from './loader/loader-variations';

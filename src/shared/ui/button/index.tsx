@@ -1,5 +1,7 @@
 import { ButtonVariations } from "./button-variations";
-import { ActionButton, DefaultButton, MenuButton, MenuButtonExpanded, OutlineButton, Spinner, TabButton } from "./styles";
+import { Loader } from "../loader";
+import { LoaderVariations } from "../loader/loader-variations";
+import { ActionButton, DefaultButton, MenuButton, MenuButtonExpanded, OutlineButton, TabButton } from "./styles";
 
 
 type Props = {
@@ -25,7 +27,7 @@ export const Button = ({ variant, active = false, fullWidth, loading = false, di
 
     return (
         <StyledButton $active={active} $fullWidth={fullWidth} disabled={disabled || loading} aria-busy={loading} {...attributes}>
-            {loading ? <Spinner aria-hidden /> : children}
+            {loading ? <Loader variant={LoaderVariations.BUTTON} /> : children}
         </StyledButton>
     );
 };

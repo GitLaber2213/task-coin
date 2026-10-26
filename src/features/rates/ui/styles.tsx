@@ -36,7 +36,14 @@ export const DateBadge = styled.span`
     white-space: nowrap;
 `;
 
-export const Status = styled.p<{ $error?: boolean }>`
+export const LoaderWrapper = styled.div`
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const Status =styled.p<{ $error?: boolean }>`
     margin: 0;
     ${text14Regular};
     color: ${({ $error }) => ($error ? colors.error : colors.secondary)};

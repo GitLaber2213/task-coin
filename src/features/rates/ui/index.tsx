@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Title, TitleVariations } from "../../../shared";
+import { Loader, LoaderVariations, Title, TitleVariations } from "../../../shared";
 import { getRates } from "../api";
 import { DEFAULT_RATE_PERIOD, type RatePeriod } from "../model/periods";
 import { buildRateRows } from "../model/rows";
 import type { RatesResponse } from "../model/types";
 import { RateChart } from "./rate-chart";
 import { RatesTable } from "./rates-table";
-import { Content, DateBadge, Header, Layout, Status } from "./styles";
+import { Content, DateBadge, Header, Layout, LoaderWrapper, Status } from "./styles";
 
 const DATE_FORMAT: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' };
 const TIME_FORMAT: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' };
@@ -42,7 +42,13 @@ export const Rates = () => {
 
     const renderContent = () => {
         if (error) return <Status $error>{error}</Status>;
-        if (isLoading || !rates?.rates) return <Status>Loading rates...</Status>;
+        if (isLoading || !rates?.rates) {
+            return (
+                <LoaderWrapper aria-busy>
+                    <Loader variant={LoaderVariations.PAGE} />
+                </LoaderWrapper>
+            );
+        };
 
         return (
             <RatesTable
