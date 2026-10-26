@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getFlag } from "../lib/get-country-flag";
-import { getBuy, getSurrender } from "../model/get-exchange-prices";
+import { getBuy, getFlag, getSurrender } from "../../../entities";
+import { getRates } from "../api";
 import type { RatesResponse } from "../model/types";
 
 const start = new Date();
@@ -15,8 +15,7 @@ export const Rates = () => {
         const fetchRates = async () => {
             setIsLoading(true);
             try {
-                const response = await fetch(`https://api.frankfurter.dev/v1/${start.toISOString().slice(0, 10)}..?from=USD&to=AUD,BGN,EUR,GBP,JPY`);
-                const data = await response.json();
+                const data = await getRates(start);
                 setRates(data);
             } catch (error) {
                 console.error('Error fetching rates:', error);

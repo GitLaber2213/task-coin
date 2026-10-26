@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useAuth } from "../../features/auth/provider";
+import { useAuth } from "../../features";
 import { ROUTES } from "../../shared";
 
 export const GuardRoutes = () => {

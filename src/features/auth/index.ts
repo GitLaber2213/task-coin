@@ -1,2 +1,2 @@
 export { Auth } from './ui';
-export { AuthProvider } from './provider';
+export { AuthProvider, useAuth } from './provider';

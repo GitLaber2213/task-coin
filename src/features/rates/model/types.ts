@@ -1,8 +1,4 @@
-export type Rate = {
-    [endDate: string]: {
-        [currency: string]: number;
-    };
-}
+import type { Rate } from "../../../entities";
 
 export type RatesResponse = {
     amount: number;

@@ -1,10 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../provider";
-
-type FormInputs = {
-    email: string;
-    password: string;
-}
+import type { LoginData } from "../model/types";
 
 export const Auth = () => {
     const { login } = useAuth();
@@ -12,7 +8,7 @@ export const Auth = () => {
         register,
         handleSubmit,
         formState: { errors }
-    } = useForm<FormInputs>({
+    } = useForm<LoginData>({
         defaultValues: {
             email: '',
             password: ''
@@ -21,7 +17,7 @@ export const Auth = () => {
     });
 
 
-    const onSubmit = (data: FormInputs) => {
+    const onSubmit = (data: LoginData) => {
         login(data);
     };
 

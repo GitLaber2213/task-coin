@@ -1,19 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
-
-type User = {
-    id: string;
-    email: string;
-    name: string;
-    role: 'admin' | 'user';
-} | null;
-
-type LoginData = {
-    email: string;
-    password: string;
-};
+import type { User } from "../../../entities";
+import { AuthApiError, getSession, loginRequest, logoutRequest } from "../api";
+import type { LoginData } from "../model/types";
 
 interface IAuthContext {
-    user: User;
+    user: User | null;
     isLoading: boolean;
     isAuth: boolean;
     login: (loginData: LoginData) => void;
@@ -26,7 +17,7 @@ const AuthContext = createContext<IAuthContext | null>(null);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isAuth, setIsAuth] = useState<boolean>(false);
-    const [user, setUser] = useState<User>(null);
+    const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -36,18 +27,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 const accessToken = localStorage.getItem('accessToken');
                 if(!accessToken) return;
 
-                const response = await fetch('https://example.com/auth', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': accessToken
-                    }
-                });
-                const res: User = await response.json();
-
-                if (response.ok) {
-                    setUser(res);
-                    setIsAuth(true);
-                };
+                const res = await getSession(accessToken);
+                setUser(res);
+                setIsAuth(true);
 
             } catch (error) {
                 console.error(error);
@@ -60,35 +42,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const login = async (loginData: LoginData) => {
         try {
-            const response = await fetch('https://example.com/auth', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: loginData.email,
-                    password: loginData.password
-                })
-            });
+            const res = await loginRequest(loginData);
 
-            const res = await response.json();
-
-            if (!response.ok) {
-                console.log(response.status)
-                if (response.status === 401) {
+            setUser(res.user);
+            setIsAuth(true);
+            localStorage.setItem('accessToken', res.token);
+            alert('Успешная авторизация');
+        } catch (error) {
+            if (error instanceof AuthApiError) {
+                if (error.status === 401) {
                     alert('Неверный логин или пароль');
                 } else {
                     alert('Ошибка авторизации');
                 };
                 return;
             };
-
-
-            setUser(res);
-            setIsAuth(true);
-            localStorage.setItem('accessToken', res.token);
-            alert('Успешная авторизация');
-        } catch (error) {
             alert('Ошибка сети, проверьте соединение');
         };
     };
@@ -96,20 +64,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const logout = async () => {
         try {
             setIsLoading(true);
-            const response = await fetch('https://example.com/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
+            await logoutRequest();
 
-            if (!response.ok) alert('ошибка');
-
-            if (response.status === 204) {
-                setUser(null);
-                setIsAuth(false);
-                localStorage.removeItem('accessToken');
-            };
+            setUser(null);
+            setIsAuth(false);
+            localStorage.removeItem('accessToken');
         } catch (err) {
             alert('ошибка')
         } finally {

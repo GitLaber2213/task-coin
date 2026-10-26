@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { QUERY_PARAMS, ROUTES } from "../../shared";
-import { useAuth } from "../../features/auth/provider";
+import { useAuth } from "../../features";
 
 
 export const NavBar = () => {
