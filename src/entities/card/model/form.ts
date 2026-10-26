@@ -6,7 +6,7 @@ export type CardFormValues = {
     priority: string;
     status: string;
     assignee: string;
-    deadline: Date;
+    deadline: Date | null;
     tags: string[];
     images: ImageListType;
 };
@@ -17,7 +17,7 @@ export const CARD_FORM_DEFAULTS: CardFormValues = {
     priority: '',
     status: '',
     assignee: '',
-    deadline: new Date(),
+    deadline: null,
     tags: [],
     images: []
 };

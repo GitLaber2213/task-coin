@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import { colors } from "../../colors";
-import { text10Medium, text10SemiBold, text15Medium, text15SemiBold, text16SemiBold } from "../../typography";
+import {
+    text10Medium,
+    text10SemiBold,
+    text14SemiBold,
+    text15Medium,
+    text15SemiBold,
+    text16SemiBold
+} from "../../typography";
 
 type Props = {
     $active?: boolean;
@@ -29,6 +36,66 @@ export const DefaultButton = styled.button<Props>`
 
     &:focus-visible {
         box-shadow: 0 0 0 3px rgba(24, 24, 76, 0.25);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: default;
+    }
+`;
+
+export const ActionButton = styled.button<Props>`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
+    padding: 13px 28px;
+    border: none;
+    outline: none;
+    border-radius: 14px;
+
+    background-color: ${colors.primary};
+    box-shadow: 0 4px 12px 0 rgba(24, 24, 76, 0.2);
+    ${text14SemiBold};
+    color: ${colors.white};
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    &:focus-visible {
+        box-shadow: 0 0 0 3px rgba(24, 24, 76, 0.25);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: default;
+    }
+`;
+
+export const OutlineButton = styled.button<Props>`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
+    padding: 13px 28px;
+    border: none;
+    outline: none;
+    border-radius: 14px;
+
+    background-color: transparent;
+    box-shadow: inset 0 0 0 1.5px ${colors.border};
+    ${text14SemiBold};
+    color: ${colors.secondary};
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    &:focus-visible {
+        box-shadow: inset 0 0 0 1.5px ${colors.primary};
     }
 
     &:disabled {

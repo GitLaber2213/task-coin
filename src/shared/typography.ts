@@ -95,3 +95,63 @@ export const text10Medium = css`
     font-weight: 500;
     font-size: 10px;
 `;
+
+export const text26Bold = css`
+    ${fontFamily};
+    font-weight: 700;
+    font-size: 26px;
+`;
+
+export const text22Bold = css`
+    ${fontFamily};
+    font-weight: 700;
+    font-size: 22px;
+`;
+
+export const text16Regular = css`
+    ${fontFamily};
+    font-weight: 400;
+    font-size: 16px;
+`;
+
+export const text14Regular = css`
+    ${fontFamily};
+    font-weight: 400;
+    font-size: 14px;
+`;
+
+export const text14SemiBold = css`
+    ${fontFamily};
+    font-weight: 600;
+    font-size: 14px;
+`;
+
+export const text13Regular = css`
+    ${fontFamily};
+    font-weight: 400;
+    font-size: 13px;
+`;
+
+export const text13Medium = css`
+    ${fontFamily};
+    font-weight: 500;
+    font-size: 13px;
+`;
+
+export const text13SemiBold = css`
+    ${fontFamily};
+    font-weight: 600;
+    font-size: 13px;
+`;
+
+export const text12SemiBold = css`
+    ${fontFamily};
+    font-weight: 600;
+    font-size: 12px;
+`;
+
+export const text10Regular = css`
+    ${fontFamily};
+    font-weight: 400;
+    font-size: 10px;
+`;

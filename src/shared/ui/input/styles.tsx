@@ -1,17 +1,10 @@
 import styled from "styled-components";
 import { colors } from "../../colors";
-import { text12Medium, text15Regular, text18Regular } from "../../typography";
+import { text14Regular, text15Regular, text18Regular } from "../../typography";
 
 type Props = {
     $error?: boolean;
 };
-
-export const Field = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    width: 100%;
-`;
 
 export const DefaultInput = styled.label<Props>`
     display: flex;
@@ -50,12 +43,41 @@ export const DefaultInput = styled.label<Props>`
     }
 `;
 
-export const Icon = styled.span`
-    ${text18Regular};
+export const FormInput = styled.label<Props>`
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 8px;
+
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+
+    background-color: ${({ $error }) => ($error ? colors.errorBackground : colors.fieldBackground)};
+    box-shadow: ${({ $error }) => ($error ? `inset 0 0 0 1.5px ${colors.error}` : "none")};
+
+    ${({ $error }) => !$error && `
+        &:focus-within {
+            box-shadow: inset 0 0 0 1.5px ${colors.primary};
+        }
+    `};
+
+    input {
+        flex: 1;
+        min-width: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        ${text14Regular};
+        color: ${colors.primary};
+    }
+
+    input::placeholder {
+        color: ${colors.secondary};
+    }
 `;
 
-export const ErrorText = styled.p`
-    margin: 0;
-    ${text12Medium};
-    color: ${colors.error};
+export const Icon = styled.span`
+    ${text18Regular};
 `;

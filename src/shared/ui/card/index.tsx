@@ -1,5 +1,5 @@
 import { CardVariations } from "./card-variations";
-import { DefaultCard } from "./styles";
+import { DefaultCard, ElevatedCard, SectionCard } from "./styles";
 
 
 type Props = {
@@ -8,7 +8,9 @@ type Props = {
 } & React.HTMLAttributes<HTMLDivElement>;
 
 const variations = {
-    [CardVariations.DEFAULT]: DefaultCard
+    [CardVariations.DEFAULT]: DefaultCard,
+    [CardVariations.SECTION]: SectionCard,
+    [CardVariations.ELEVATED]: ElevatedCard
 };
 
 export const Card = ({ variant, children, ...attributes }: Props) => {

@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { CardForm, type CardFormValues } from "../../../entities";
+import { Button, ButtonVariations } from "../../../shared";
 import { CARD_STEP_PARAM } from "../model/step";
 
 export const CardConfirm = () => {
@@ -14,7 +15,7 @@ export const CardConfirm = () => {
         payload.append('priority', values.priority);
         payload.append('status', values.status);
         payload.append('assignee', values.assignee);
-        payload.append('deadline', values.deadline.toISOString());
+        if (values.deadline) payload.append('deadline', values.deadline.toISOString());
         values.tags.forEach((tag) => payload.append('tags', tag));
         values.images.forEach(({ file }) => {
             if (file) payload.append('images', file);
@@ -37,14 +38,14 @@ export const CardConfirm = () => {
 
     return (
         <CardForm
-            title="Card Confirm"
+            title="Create New Card"
             onSubmit={onSubmit}
             actions={
                 <>
-                    <button type="button" onClick={handleCancel}>
+                    <Button variant={ButtonVariations.OUTLINE_BUTTON} type="button" onClick={handleCancel}>
                         Cancel
-                    </button>
-                    <button type="submit">Save Card</button>
+                    </Button>
+                    <Button variant={ButtonVariations.ACTION_BUTTON} type="submit">Save Card</Button>
                 </>
             }
         />

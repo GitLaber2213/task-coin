@@ -1,8 +1,11 @@
+import { useFormContext } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
-import { CardForm } from "../../../entities";
+import { CardForm, type CardFormValues } from "../../../entities";
+import { Button, ButtonVariations } from "../../../shared";
 import { CARD_STEP_PARAM } from "../model/step";
 
 export const CardEdit = () => {
+    const { reset } = useFormContext<CardFormValues>();
     const [, setSearchParams] = useSearchParams();
 
     const onSubmit = () => {
@@ -11,10 +14,15 @@ export const CardEdit = () => {
 
     return (
         <CardForm
-            title="Cards"
+            title="Create New Card"
             onSubmit={onSubmit}
             actions={
-                <button type="submit">Create Card</button>
+                <>
+                    <Button variant={ButtonVariations.OUTLINE_BUTTON} type="button" onClick={() => reset()}>
+                        Cancel
+                    </Button>
+                    <Button variant={ButtonVariations.ACTION_BUTTON} type="submit">Create Card</Button>
+                </>
             }
         />
     );
