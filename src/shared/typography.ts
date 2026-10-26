@@ -155,3 +155,21 @@ export const text10Regular = css`
     font-weight: 400;
     font-size: 10px;
 `;
+
+export const text36Bold = css`
+    ${fontFamily};
+    font-weight: 700;
+    font-size: 36px;
+`;
+
+export const text14Medium = css`
+    ${fontFamily};
+    font-weight: 500;
+    font-size: 14px;
+`;
+
+export const text11Medium = css`
+    ${fontFamily};
+    font-weight: 500;
+    font-size: 11px;
+`;

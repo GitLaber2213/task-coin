@@ -19,7 +19,9 @@ export const colors = {
     orangeBackground: '#fff0e0',
     green: '#22b14c',
     greenBackground: '#e0f8e6',
-    imagePlaceholder: '#cfd8e7'
+    imagePlaceholder: '#cfd8e7',
+    chartBackground: '#f2fcf5',
+    tabBackground: '#f0f1f6'
 } as const;
 
 export type Color = keyof typeof colors;

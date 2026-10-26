@@ -1,5 +1,5 @@
 import { ButtonVariations } from "./button-variations";
-import { ActionButton, DefaultButton, MenuButton, MenuButtonExpanded, OutlineButton } from "./styles";
+import { ActionButton, DefaultButton, MenuButton, MenuButtonExpanded, OutlineButton, TabButton } from "./styles";
 
 
 type Props = {
@@ -14,6 +14,7 @@ const variations = {
     [ButtonVariations.DEFAULT_BUTTON]: DefaultButton,
     [ButtonVariations.ACTION_BUTTON]: ActionButton,
     [ButtonVariations.OUTLINE_BUTTON]: OutlineButton,
+    [ButtonVariations.TAB_BUTTON]: TabButton,
     [ButtonVariations.MENU_BUTTON]: MenuButton,
     [ButtonVariations.MENU_BUTTON_EXPANDED]: MenuButtonExpanded
 };

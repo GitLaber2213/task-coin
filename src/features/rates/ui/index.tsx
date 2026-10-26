@@ -1,22 +1,31 @@
 import { useEffect, useState } from "react";
-import { getBuy, getFlag, getSurrender } from "../../../entities";
+import { Title, TitleVariations } from "../../../shared";
 import { getRates } from "../api";
+import { DEFAULT_RATE_PERIOD, type RatePeriod } from "../model/periods";
+import { buildRateRows } from "../model/rows";
 import type { RatesResponse } from "../model/types";
+import { RateChart } from "./rate-chart";
+import { RatesTable } from "./rates-table";
+import { Content, DateBadge, Header, Layout, Status } from "./styles";
 
-const start = new Date();
-start.setDate(start.getDate() - 365);
+const DATE_FORMAT: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' };
+const TIME_FORMAT: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' };
 
 export const Rates = () => {
     const [rates, setRates] = useState<RatesResponse>();
+    const [updatedAt, setUpdatedAt] = useState<string>('');
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [selected, setSelected] = useState<string | null>(null);
+    const [period, setPeriod] = useState<RatePeriod>(DEFAULT_RATE_PERIOD);
 
     useEffect(() => {
         const fetchRates = async () => {
             setIsLoading(true);
             try {
-                const data = await getRates(start);
+                const data = await getRates();
                 setRates(data);
+                setUpdatedAt(new Date().toLocaleTimeString('en-GB', TIME_FORMAT));
             } catch (error) {
                 console.error('Error fetching rates:', error);
                 setError('Failed to fetch rates: ' + error);
@@ -27,41 +36,46 @@ export const Rates = () => {
         fetchRates();
     }, []);
 
-    if (isLoading && !rates || !rates?.rates) {
-        return <p>Loading rates...</p>;
+    const handleSelect = (currency: string) => {
+        setSelected((prev) => (prev === currency ? null : currency));
     };
 
-    if (error) {
-        return <p>{error}</p>;
+    const renderContent = () => {
+        if (error) return <Status $error>{error}</Status>;
+        if (isLoading || !rates?.rates) return <Status>Loading rates...</Status>;
+
+        return (
+            <RatesTable
+                rows={buildRateRows(rates)}
+                updatedAt={updatedAt}
+                compact={Boolean(selected)}
+                selected={selected}
+                onSelect={handleSelect}
+            />
+        );
     };
 
     return (
-        <div>
-            <h1>Rates</h1>
-            <p>Amount: {rates.amount}</p>
-            <p>Base: {rates.base}</p>
-            <p>End Date: {rates.end_date}</p>
-            <p>Start Date: {rates.start_date}</p>
-            {Object.entries(rates.rates[rates.end_date]).map(([currency, rate]) => (
-                <div key={currency}>
-                    <img src={getFlag(currency)} alt={`${currency} Flag`} style={{ width: '25px', height: '18px', marginRight: '5px' }} />
-                    <strong>{currency}:</strong> {rate} - Surrender: {getSurrender(rate).toFixed(4)} Buy: {getBuy(rate).toFixed(4)}
-                    
-                </div>
-            ))}
+        <Layout>
+            <Content $compact={Boolean(selected)}>
+                <Header>
+                    <Title variant={TitleVariations.PAGE}>Exchange rates</Title>
+                    {rates?.end_date && (
+                        <DateBadge>{new Date(rates.end_date).toLocaleDateString('en-US', DATE_FORMAT)}</DateBadge>
+                    )}
+                </Header>
+                {renderContent()}
+            </Content>
 
-            {/* {sliceByDays(rates.rates, 7).map(({ date, ...values }) => (
-                <div key={date}>
-                    <h3>{date}</h3>
-                    {Object.entries(values).map(([currency, rate]) => (
-                        <p key={currency}>
-                            <img src={getFlag(currency)} alt={`${currency} Flag`} style={{ width: '25px', height: '18px', marginRight: '5px' }} />
-                            <strong>{currency}:</strong> {rate} - Surrender: {getSurrender(rate).toFixed(4)} Buy: {getBuy(rate).toFixed(4)}
-                        </p>
-                    ))}
-                </div>
-            ))} */}
-
-        </div>
+            {rates?.rates && selected && (
+                <RateChart
+                    rates={rates.rates}
+                    base={rates.base}
+                    currency={selected}
+                    period={period}
+                    onPeriodChange={setPeriod}
+                />
+            )}
+        </Layout>
     );
-};  
+};

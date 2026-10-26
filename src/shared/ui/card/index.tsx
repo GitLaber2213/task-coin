@@ -1,5 +1,5 @@
 import { CardVariations } from "./card-variations";
-import { DefaultCard, ElevatedCard, SectionCard } from "./styles";
+import { DefaultCard, ElevatedCard, PanelCard, SectionCard } from "./styles";
 
 
 type Props = {
@@ -10,7 +10,8 @@ type Props = {
 const variations = {
     [CardVariations.DEFAULT]: DefaultCard,
     [CardVariations.SECTION]: SectionCard,
-    [CardVariations.ELEVATED]: ElevatedCard
+    [CardVariations.ELEVATED]: ElevatedCard,
+    [CardVariations.PANEL]: PanelCard
 };
 
 export const Card = ({ variant, children, ...attributes }: Props) => {

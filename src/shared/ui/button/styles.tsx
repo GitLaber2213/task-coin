@@ -3,6 +3,7 @@ import { colors } from "../../colors";
 import {
     text10Medium,
     text10SemiBold,
+    text13SemiBold,
     text14SemiBold,
     text15Medium,
     text15SemiBold,
@@ -100,6 +101,32 @@ export const OutlineButton = styled.button<Props>`
 
     &:disabled {
         opacity: 0.6;
+        cursor: default;
+    }
+`;
+
+export const TabButton = styled.button<Props>`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    padding: 8px 16px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+
+    background-color: ${({ $active }) => ($active ? colors.primary : colors.tabBackground)};
+    ${text13SemiBold};
+    color: ${({ $active }) => ($active ? colors.white : colors.secondary)};
+
+    cursor: pointer;
+
+    &:focus-visible {
+        box-shadow: 0 0 0 2px ${colors.accent};
+    }
+
+    &:disabled {
         cursor: default;
     }
 `;

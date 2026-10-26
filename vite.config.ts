@@ -8,4 +8,9 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  // recharts is reached only through a lazy import, so prebundle it at startup
+  // instead of re-optimizing mid-session and invalidating already loaded modules
+  optimizeDeps: {
+    include: ['recharts', 'react-is']
+  },
 })
