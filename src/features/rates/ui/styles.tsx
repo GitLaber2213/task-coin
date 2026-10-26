@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, text13SemiBold, text14Regular } from "../../../shared";
+import { colors, MEDIA, text13SemiBold, text14Regular } from "../../../shared";
 
 type Props = {
     $compact: boolean;
@@ -9,7 +9,11 @@ export const Layout = styled.div`
     display: flex;
     align-items: stretch;
     gap: 20px;
-    min-height: calc(100vh - 56px);
+    min-height: var(--content-min-height, 100vh);
+
+    @media ${MEDIA.TABLET} {
+        flex-direction: column;
+    }
 `;
 
 export const Content = styled.div<Props>`
@@ -22,6 +26,7 @@ export const Content = styled.div<Props>`
 
 export const Header = styled.div`
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 12px;

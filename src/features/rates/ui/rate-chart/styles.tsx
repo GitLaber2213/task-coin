@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, text13Regular, text14SemiBold, text20Bold, text36Bold } from "../../../../shared";
+import { colors, MEDIA, text13Regular, text14SemiBold, text20Bold, text36Bold } from "../../../../shared";
 
 type Props = {
     $positive: boolean;
@@ -8,6 +8,10 @@ type Props = {
 export const Panel = styled.aside`
     flex: 0 0 420px;
     min-width: 0;
+
+    @media ${MEDIA.TABLET} {
+        flex: none;
+    }
 `;
 
 export const Content = styled.div`

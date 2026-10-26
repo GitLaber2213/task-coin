@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MEDIA } from "../../../../shared";
 
 export const Form = styled.form`
     display: flex;
@@ -10,6 +11,12 @@ export const Columns = styled.div`
     display: flex;
     align-items: flex-start;
     gap: 28px;
+
+    @media ${MEDIA.MOBILE} {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+    }
 `;
 
 export const Column = styled.div`
@@ -25,4 +32,10 @@ export const Actions = styled.div`
     justify-content: flex-end;
     align-items: center;
     gap: 12px;
+
+    @media ${MEDIA.MOBILE} {
+        & > * {
+            flex: 1;
+        }
+    }
 `;

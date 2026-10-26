@@ -11,6 +11,7 @@ export const Form = styled.form`
     align-items: center;
     gap: 24px;
     width: 340px;
+    max-width: 100%;
 `;
 
 export const Fieldset = styled.fieldset`

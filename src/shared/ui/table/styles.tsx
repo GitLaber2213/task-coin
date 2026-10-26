@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../colors";
+import { MEDIA } from "../../constants";
 import {
     text11Medium,
     text12Medium,
@@ -56,6 +57,7 @@ export const DefaultTable = styled.div`
     border-radius: 20px;
     background-color: ${colors.white};
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.04);
+    overflow-x: auto;
 
     ${Header} {
         padding: 12px;
@@ -69,6 +71,14 @@ export const DefaultTable = styled.div`
 
     ${Row}[aria-selected="true"] {
         ${text14SemiBold};
+    }
+
+    @media ${MEDIA.MOBILE} {
+        padding: 4px 12px;
+
+        ${Header}, ${Row}, ${Divider} {
+            min-width: 560px;
+        }
     }
 `;
 
