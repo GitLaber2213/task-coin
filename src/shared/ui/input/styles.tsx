@@ -38,6 +38,14 @@ export const DefaultInput = styled.label<Props>`
         color: ${colors.primary};
     }
 
+    &:has(input:disabled) {
+        opacity: 0.6;
+    }
+
+    input:disabled {
+        cursor: default;
+    }
+
     input::placeholder {
         color: ${colors.secondary};
     }
@@ -71,6 +79,14 @@ export const FormInput = styled.label<Props>`
         background-color: transparent;
         ${text14Regular};
         color: ${colors.primary};
+    }
+
+    &:has(input:disabled) {
+        opacity: 0.6;
+    }
+
+    input:disabled {
+        cursor: default;
     }
 
     input::placeholder {

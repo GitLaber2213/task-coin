@@ -7,7 +7,7 @@ interface IAuthContext {
     user: User | null;
     isLoading: boolean;
     isAuth: boolean;
-    login: (loginData: LoginData) => void;
+    login: (loginData: LoginData) => Promise<void>;
     logout: () => void;
 };
 

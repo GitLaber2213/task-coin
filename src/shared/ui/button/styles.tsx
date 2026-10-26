@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colors } from "../../colors";
 import {
     text10Medium,
@@ -14,6 +14,24 @@ type Props = {
     $active?: boolean;
     $fullWidth?: boolean;
 };
+
+const spin = keyframes`
+    to {
+        transform: rotate(360deg);
+    }
+`;
+
+export const Spinner = styled.span`
+    display: block;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+
+    animation: ${spin} 0.7s linear infinite;
+`;
 
 export const DefaultButton = styled.button<Props>`
     display: flex;

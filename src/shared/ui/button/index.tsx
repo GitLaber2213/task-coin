@@ -1,11 +1,12 @@
 import { ButtonVariations } from "./button-variations";
-import { ActionButton, DefaultButton, MenuButton, MenuButtonExpanded, OutlineButton, TabButton } from "./styles";
+import { ActionButton, DefaultButton, MenuButton, MenuButtonExpanded, OutlineButton, Spinner, TabButton } from "./styles";
 
 
 type Props = {
     variant: ButtonVariations;
     active?: boolean;
     fullWidth?: boolean;
+    loading?: boolean;
     children: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -19,12 +20,12 @@ const variations = {
     [ButtonVariations.MENU_BUTTON_EXPANDED]: MenuButtonExpanded
 };
 
-export const Button = ({ variant, active = false, fullWidth, children, ...attributes }: Props) => {
+export const Button = ({ variant, active = false, fullWidth, loading = false, disabled, children, ...attributes }: Props) => {
     const StyledButton = variations[variant];
 
     return (
-        <StyledButton $active={active} $fullWidth={fullWidth} {...attributes}>
-            {children}
+        <StyledButton $active={active} $fullWidth={fullWidth} disabled={disabled || loading} aria-busy={loading} {...attributes}>
+            {loading ? <Spinner aria-hidden /> : children}
         </StyledButton>
     );
 };

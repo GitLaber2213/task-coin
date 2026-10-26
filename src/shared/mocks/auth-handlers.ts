@@ -1,3 +1,4 @@
+import { delay } from 'msw';
 import { http, HttpResponse } from 'msw/http'
 import type { AuthDto } from './dtos/auth-dto';
 
@@ -5,6 +6,7 @@ let _isLogged = false;
 
 export const authHandlers = [
     http.post<never, AuthDto>('https://example.com/auth', async ({ request }) => {
+        await delay(1500);
         const { email, password } = await request.json();
 
 

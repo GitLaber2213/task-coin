@@ -13,6 +13,18 @@ export const Form = styled.form`
     width: 340px;
 `;
 
+export const Fieldset = styled.fieldset`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+`;
+
 export const TitleGroup = styled.div`
     display: flex;
     flex-direction: column;

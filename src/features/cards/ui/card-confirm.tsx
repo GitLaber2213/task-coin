@@ -21,7 +21,6 @@ export const CardConfirm = () => {
             if (file) payload.append('images', file);
         });
 
-        // FormData doesn't serialize to JSON, so show files by their metadata
         const preview = Array.from(payload.entries()).map(([key, value]) =>
             value instanceof File
                 ? `${key}: File(${value.name}, ${value.size} bytes, ${value.type})`
