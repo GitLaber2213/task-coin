@@ -1,16 +1,12 @@
-import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { AuthPage, RatesPage, CardPage } from "../../pages";
 import { GuardRoutes, GuestRoutes } from "./guard";
 import { ROUTES } from "../../shared";
-import { NavBar } from "../../widgets";
+import { AppLayout } from "../layout";
 
 
 export const router = createBrowserRouter([{
     path: '/',
-    element: <>
-        <NavBar />
-        <Outlet />
-    </>,
     errorElement: <div>404</div>,
     children: [
         {
@@ -31,13 +27,18 @@ export const router = createBrowserRouter([{
             element: <GuardRoutes />,
             children: [
                 {
-                    path: ROUTES.RATES,
-                    element: <RatesPage />
-                },
-                {
-                    path: ROUTES.CARD_NEW,
-                    element: <CardPage />
-                },
+                    element: <AppLayout />,
+                    children: [
+                        {
+                            path: ROUTES.RATES,
+                            element: <RatesPage />
+                        },
+                        {
+                            path: ROUTES.CARD_NEW,
+                            element: <CardPage />
+                        },
+                    ]
+                }
             ]
         }
     ]

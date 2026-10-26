@@ -1,11 +1,12 @@
 import { Auth } from "../../features";
+import { Page } from "./styles";
 
 
 
 export const AuthPage = () => {
     return (
-        <div>
+        <Page>
             <Auth />
-        </div>
+        </Page>
     );
 };
