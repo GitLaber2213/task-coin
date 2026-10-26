@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { User } from "../../../entities";
+import { notify } from "../../../shared";
 import { AuthApiError, getSession, loginRequest, logoutRequest } from "../api";
 import type { LoginData } from "../model/types";
 
@@ -47,17 +48,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setUser(res.user);
             setIsAuth(true);
             localStorage.setItem('accessToken', res.token);
-            alert('Успешная авторизация');
+            notify.success('Успешная авторизация');
         } catch (error) {
             if (error instanceof AuthApiError) {
                 if (error.status === 401) {
-                    alert('Неверный логин или пароль');
+                    notify.error('Неверный логин или пароль');
                 } else {
-                    alert('Ошибка авторизации');
+                    notify.error('Ошибка авторизации');
                 };
                 return;
             };
-            alert('Ошибка сети, проверьте соединение');
+            notify.error('Ошибка сети, проверьте соединение');
         };
     };
 
@@ -69,8 +70,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setUser(null);
             setIsAuth(false);
             localStorage.removeItem('accessToken');
-        } catch (err) {
-            alert('ошибка')
+        } catch {
+            notify.error('Не удалось выйти, попробуйте ещё раз');
         } finally {
             setIsLoading(false);
         };

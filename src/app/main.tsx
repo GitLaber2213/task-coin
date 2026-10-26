@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './route'
-import { worker } from '../shared'
+import { Notifications, worker } from '../shared'
 import { AuthProvider } from '../features'
 import { GlobalStyle } from './styles/global'
 
@@ -17,6 +17,7 @@ enableMocking().then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <GlobalStyle />
+      <Notifications />
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>

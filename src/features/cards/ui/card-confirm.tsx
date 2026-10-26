@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { CardForm, type CardFormValues } from "../../../entities";
-import { Button, ButtonVariations } from "../../../shared";
+import { Button, ButtonVariations, notify } from "../../../shared";
 import { CARD_STEP_PARAM } from "../model/step";
 
 export const CardConfirm = () => {
@@ -27,7 +27,7 @@ export const CardConfirm = () => {
                 : `${key}: ${value}`
         );
 
-        alert(preview.join('\n'));
+        notify.success(['Карточка сохранена', ...preview].join('\n'));
     };
 
     const handleCancel = () => {

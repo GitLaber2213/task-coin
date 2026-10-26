@@ -12,6 +12,8 @@ export { Title } from './title';
 export { Table, type TableColumn } from './table';
 export { LineChart, type LineChartPoint } from './line-chart';
 export { Loader } from './loader';
+export { Notifications } from './notifications';
+export { notify } from './notifications/store';
 
 export { ButtonVariations } from './button/button-variations';
 export { InputVariations } from './input/input-variations';
@@ -27,3 +29,4 @@ export { TitleVariations } from './title/title-variations';
 export { TableVariations } from './table/table-variations';
 export { LineChartVariations } from './line-chart/line-chart-variations';
 export { LoaderVariations } from './loader/loader-variations';
+export { NotificationVariations } from './notifications/notification-variations';
